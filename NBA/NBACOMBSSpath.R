@@ -70,7 +70,7 @@ library(ggplot2)
 
 colnames(X)[12] = "height"
 vnames = colnames(X)
-paths  = list(FAMM = Afamm, FRB = Afrb, MSE = Amse)
+paths  = list(`Robust COMBSS` = Afamm, FRB = Afrb, `COMBSS` = Amse)
 
 df = do.call(rbind, lapply(names(paths), function(nm) {
   A = paths[[nm]]
@@ -93,7 +93,7 @@ df$state  = factor(df$state, levels = c("Inactive", "Active", "Newly Entered"))
 pal = c("Inactive"      = "#F2F0EB",
          "Active"        = "#3C5488",
          "Newly Entered" = "#E07B54")
-
+df$method = factor(df$method, levels = c("FRB", "Robust COMBSS", "COMBSS"))
 ggplot(df, aes(var, k, fill = state)) +
   geom_tile(colour = "white", linewidth = 0.7, width = 0.95, height = 0.95) +
   facet_wrap(~ method) +

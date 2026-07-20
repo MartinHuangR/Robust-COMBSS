@@ -390,9 +390,9 @@ optLambda = function(X, y, test.split = 0.25, criterion = "FAMM"){
 
 
 
-# All code below are written by me. 
-
-
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+#                         START: HUANG ET AL.                       #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 checkCorrect = function(A, active, p){
   subsets = 1:(active - 1)
   supersets = (active + 1):(p-1)
@@ -507,3 +507,6 @@ plot_val = function(df){
     scale_colour_manual(values = cols) +
     theme(axis.ticks.x.top = element_blank(), legend.position = "none")
 }
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+#                         END: HUANG ET AL.                         #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #

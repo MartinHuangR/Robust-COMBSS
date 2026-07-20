@@ -18,10 +18,10 @@ cf1$Tau = rep(c(0,0.1), each = 3)
 cf1$klev = 2
 cf1$kslo = 100
 cf1 = rownames_to_column(cf1, var = "tmp")
-cf1$Method = "MSE"
-cf1$Method[grepl("famm", cf1$tmp)] = "FAMM"
+cf1$Method = "COMBSS"
+cf1$Method[grepl("famm", cf1$tmp)] = "Robust COMBSS"
 cf1$Method[grepl("frb", cf1$tmp)] = "FRB"
-cf1$Method = factor(cf1$Method, levels = c("FRB", "FAMM", "MSE"))
+cf1$Method = factor(cf1$Method, levels = c("FRB", "Robust COMBSS", "COMBSS"))
 mcf1 = reshape2::melt(cf1 |> dplyr::select(-tmp), id.vars = c("Tau",
                                                               "kslo", "klev", "Method"))
 mcf1$Setting = "(i):~n==200*`,`~p==20*`,`~`|`*beta[S]*`|`==3"
@@ -32,10 +32,10 @@ cf2$Tau = rep(c(0,0.1), each = 3)
 cf2$klev = 2
 cf2$kslo = 100
 cf2 = rownames_to_column(cf2, var = "tmp")
-cf2$Method = "MSE"
-cf2$Method[grepl("famm", cf2$tmp)] = "FAMM"
+cf2$Method = "COMBSS"
+cf2$Method[grepl("famm", cf2$tmp)] = "Robust COMBSS"
 cf2$Method[grepl("frb", cf2$tmp)] = "FRB"
-cf2$Method = factor(cf2$Method, levels = c("FRB", "FAMM", "MSE"))
+cf2$Method = factor(cf2$Method, levels = c("FRB", "Robust COMBSS", "COMBSS"))
 mcf2 = reshape2::melt(cf2 |> dplyr::select(-tmp), id.vars = c("Tau",
                                                               "kslo", "klev", "Method"))
 
@@ -80,18 +80,18 @@ ggplot(mcf, aes(x = size, y = value/1000, colour = Method, group = Method)) +
 cft1 = c(famm1.0t, famm1.0.1t,  
          mse1.0t,  mse1.0.1t, 
          frb1.0t,  frb1.0.1t)
-cft1 = data.frame(Time = cft1, method = rep(c("FAMM", "MSE", "FRB"), each = 2000),
+cft1 = data.frame(Time = cft1, method = rep(c("Robust COMBSS", "COMBSS", "FRB"), each = 2000),
                   Setting = "(i):~n==200*`,`~p==20*`,`~`|`*beta[S]*`|`==3")
-cft1$method = factor(cft1$method, levels = c("FRB", "FAMM", "MSE"))
+cft1$method = factor(cft1$method, levels = c("FRB", "Robust COMBSS", "COMBSS"))
 
 
 
 cft2 = c(famm2.0t, famm2.0.1t,  
          mse2.0t,  mse2.0.1t, 
          frb2.0t,  frb2.0.1t)
-cft2 = data.frame(Time = cft2, method = rep(c("FAMM", "MSE", "FRB"), each = 2000),
+cft2 = data.frame(Time = cft2, method = rep(c("Robust COMBSS", "COMBSS", "FRB"), each = 2000),
                   Setting = "(ii):~n==500*`,`~p==50*`,`~`|`*beta[S]*`|`==5")
-cft2$method = factor(cft2$method, levels = c("FRB", "FAMM", "MSE"))
+cft2$method = factor(cft2$method, levels = c("FRB", "Robust COMBSS", "COMBSS"))
 
 cft = rbind(cft1, cft2)
 ggplot(cft, aes(x = method,
