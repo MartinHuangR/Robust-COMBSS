@@ -8,7 +8,8 @@
 #         School of Mathematics & Statistics, University of Sydney  #          
 #         AUSTRALIA                                                 #          
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-
+source("COMBSS/CFuncs.R")
+source("Functions.R")
 # Low Dimensional
 # https://github.com/benoit-liquet/COMBSS-R-VIGNETTE/blob/main/Low_dimensional_example.md
 n <- 100

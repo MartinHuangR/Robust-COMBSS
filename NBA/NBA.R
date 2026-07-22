@@ -112,7 +112,6 @@ colnames(X)[mmModel]
 set.seed(1)
 numFolds = 5
 repeats = 10
-fammErrRMSE = mmErrRMSE = frbErrRMSE = AICErrRMSE = c()
 fammErrMAE = mmErrMAE = frbErrMAE = AICErrMAE =  c()
 
 for (rep in 1:repeats){
@@ -135,21 +134,10 @@ for (rep in 1:repeats){
     frbPred   = predict(frbLM, data.frame(Xtest[,frbModel, drop = F]))
     AICPred   = predict(AICLM, data.frame(Xtest[,AICModel, drop = F]))
     
-    
-    fammRMSE  = sqrt(mean((ytest - fammPred)^2))
-    mmRMSE    = sqrt(mean((ytest - mmPred)^2))
-    frbRMSE   = sqrt(mean((ytest - frbPred)^2))
-    AICRMSE   = sqrt(mean((ytest - AICPred)^2))
-    
     fammMAE  = Metrics::mae(ytest, fammPred)
     mmMAE    = Metrics::mae(ytest, mmPred)
     frbMAE   = Metrics::mae(ytest, frbPred)
     AICMAE   = Metrics::mae(ytest, AICPred)
-    
-    fammErrRMSE = c(fammErrRMSE, fammRMSE)
-    mmErrRMSE   = c(mmErrRMSE, mmRMSE)
-    frbErrRMSE  = c(frbErrRMSE, frbRMSE)
-    AICErrRMSE  = c(AICErrRMSE, AICRMSE)
     
     fammErrMAE = c(fammErrMAE, fammMAE)
     mmErrMAE = c(mmErrMAE, mmMAE)
@@ -159,16 +147,6 @@ for (rep in 1:repeats){
   
 }
 
-
-mean(frbErrRMSE)  |> round(x = _, digits = 2)
-mean(mmErrRMSE) |> round(x = _, digits = 2)
-mean(fammErrRMSE) |> round(x = _, digits = 2)
-mean(AICErrRMSE) |> round(x = _, digits = 2)
-
-sd(frbErrRMSE) |> round(x = _, digits = 2)
-sd(mmErrRMSE) |> round(x = _, digits = 2)
-sd(fammErrRMSE) |> round(x = _, digits = 2)
-sd(AICErrRMSE) |> round(x = _, digits = 2)
 
 
 mean(frbErrMAE) |> round(x = _, digits = 2)
@@ -181,8 +159,7 @@ sd(mmErrMAE) |> round(x = _, digits = 2)
 sd(fammErrMAE) |> round(x = _, digits = 2)
 sd(AICErrMAE) |> round(x = _, digits = 2)
 
-save(fammErrRMSE, mmErrRMSE, frbErrRMSE, AICErrRMSE,
-     fammErrMAE, mmErrMAE, frbErrMAE, AICErrMAE,
+save(fammErrMAE, mmErrMAE, frbErrMAE, AICErrMAE,
      TimeFamm, TimeMM, TimeFRB, TimeAIC,
      fammModel, mmModel, frbModel, AICModel,
      file = "NBAms.RData")

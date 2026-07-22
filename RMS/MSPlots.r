@@ -82,7 +82,7 @@ s1p1 = ggplot(S1, aes(x = Tau, y = True/1000, colour = Method, group = Method)) 
   scale_colour_manual(values = cols)
 s1p2 = ggplot(S1, aes(x = as.numeric(TotalTime)/60, y = True/1000, colour = Method, shape = Tau)) + geom_point(size = 3) +
   ylim(0.97,1) + 
-  scale_x_log10(breaks = c(10,30,150),limits = c(8, 200)) + 
+  scale_x_log10(breaks = c(10,30,100,200),limits = c(8, 200)) + 
   ylab("True Model Empirical Selection Probability") + xlab("Minutes taken to run 1000 datasets") +
   theme(legend.position = "bottom") + theme_few_grid(base_size = 15) +
   scale_colour_manual(values = cols)
@@ -116,7 +116,7 @@ s2p1 = ggplot(S2, aes(x = Tau, y = True/1000, colour = Method, group = Method)) 
 
 s2p2 = ggplot(S2, aes(x = as.numeric(TotalTime)/60, y = True/1000, colour = Method, shape = Tau)) + geom_point(size = 3) +
   theme_bw() +
-  scale_x_log10(breaks = c(50, 100, 1000), limits = c(50, 1000)) + 
+  scale_x_log10(breaks = c(30, 100, 500,1000), limits = c(30, 1000)) +
   ylim(0.97,1) + 
   ylab("True Model Empirical Selection Probability") + xlab("Minutes taken to run 1000 datasets") +
   theme(legend.position = "bottom") + theme_few_grid(base_size = 15) +
@@ -157,6 +157,3 @@ p <-
 fig2 = p + plot_annotation(tag_levels = list(c("(i)", "(ii)", "", "")))
 fig2
 # ggsave("FAMM_paper/Figures/S14.pdf", fig2, width = 10, height = 8)
-
-
-

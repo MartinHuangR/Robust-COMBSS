@@ -95,10 +95,13 @@ List msFAMMcpp(const arma::mat& X,
   
   
   // 2) residual ranks & strata assignment
-  arma::uvec res_rank = arma::sort_index(resid) + 1;
-  arma::vec res_rank_d = arma::conv_to<arma::vec>::from(res_rank);
+  // ord[k] = original index of the k-th smallest residual (the sort permutation).
+  // We need the inverse: rnk[i] = 0-based rank of observation i.
+  arma::uvec ord = arma::sort_index(resid);
+  arma::uvec rnk(n);
+  rnk.elem(ord) = arma::regspace<arma::uvec>(0, n - 1);   // invert the permutation
   arma::ivec res_ind = arma::conv_to<arma::ivec>::from(
-    arma::floor((res_rank_d - 1.0) * strata / double(n))) + 1;
+    arma::floor(arma::conv_to<arma::vec>::from(rnk) * strata / double(n))) + 1;
   
   // 3) split into strata
   std::vector<arma::mat> X_list(strata);
@@ -281,10 +284,14 @@ List msMMcpp(const arma::mat& X,
   
   
   // 2) residual ranks & strata assignment
-  arma::uvec res_rank = arma::sort_index(resid) + 1;
-  arma::vec res_rank_d = arma::conv_to<arma::vec>::from(res_rank);
+  // 2) residual ranks & strata assignment
+  // ord[k] = original index of the k-th smallest residual (the sort permutation).
+  // We need the inverse: rnk[i] = 0-based rank of observation i.
+  arma::uvec ord = arma::sort_index(resid);
+  arma::uvec rnk(n);
+  rnk.elem(ord) = arma::regspace<arma::uvec>(0, n - 1);   // invert the permutation
   arma::ivec res_ind = arma::conv_to<arma::ivec>::from(
-    arma::floor((res_rank_d - 1.0) * strata / double(n))) + 1;
+    arma::floor(arma::conv_to<arma::vec>::from(rnk) * strata / double(n))) + 1;
   
   // 3) split into strata
   std::vector<arma::mat> X_list(strata);
@@ -522,10 +529,13 @@ List critFamm(const arma::mat& X,
   }
   
   // 2) residual ranks & strata assignment
-  arma::uvec res_rank = arma::sort_index(resid) + 1;
-  arma::vec res_rank_d = arma::conv_to<arma::vec>::from(res_rank);
+  // ord[k] = original index of the k-th smallest residual (the sort permutation).
+  // We need the inverse: rnk[i] = 0-based rank of observation i.
+  arma::uvec ord = arma::sort_index(resid);
+  arma::uvec rnk(n);
+  rnk.elem(ord) = arma::regspace<arma::uvec>(0, n - 1);   // invert the permutation
   arma::ivec res_ind = arma::conv_to<arma::ivec>::from(
-    arma::floor((res_rank_d - 1.0) * strata / double(n))) + 1;
+    arma::floor(arma::conv_to<arma::vec>::from(rnk) * strata / double(n))) + 1;
   
   // 3) split into strata
   std::vector<arma::mat> X_list(strata);
