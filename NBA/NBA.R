@@ -46,7 +46,6 @@ fig4 = cellMapCol(t(DDCdatafr$stdResid),
         axis.title.x = element_text(margin = margin(t = 8))) + 
   ggtitle(element_blank())
 fig4
-ggsave("FAMM_paper/Figures/cellMapNBA.pdf", fig4, width = 18, height = 3.1)
 
 NBAOutlier = cbind(X,y)
 colnames(NBAOutlier) = c(colnames(X), "ast")

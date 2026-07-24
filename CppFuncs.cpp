@@ -284,7 +284,6 @@ List msMMcpp(const arma::mat& X,
   
   
   // 2) residual ranks & strata assignment
-  // 2) residual ranks & strata assignment
   // ord[k] = original index of the k-th smallest residual (the sort permutation).
   // We need the inverse: rnk[i] = 0-based rank of observation i.
   arma::uvec ord = arma::sort_index(resid);
