@@ -134,7 +134,8 @@ s1p1_noleg <- s1p1 +
 s2p1_noleg <- s2p1 +
   theme(legend.position = "none") +
   guides(fill = "none", color = "none", shape = "none", linetype = "none")
-
+s1p2 = s1p2 + labs(shape = expression(tau))
+s2p2 = s2p2 + labs(shape = expression(tau))
 p <-
   (
     s1p1_noleg + s2p1_noleg +

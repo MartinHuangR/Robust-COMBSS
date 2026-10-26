@@ -3,7 +3,11 @@
 This repository contains code to reproduce results as given in the paper "Robust Best Subset Selection via Fast Approximate MM-Estimation". For any questions please email martin.huang@sydney.edu.au.
 
 # Simulations
-The repository is split into three folders, "RMS", "COMBSS", and "NBA", corresponding to sections 4.1, 4.2 and 4.3 respectively. The files "Functions.R" and "CppFuncs.cpp" contain functions for all three folders. We have also included the simulation results in .RData files. The file paths assumes "Robust COMBSS" is the home working directory.
+The repository is split into three folders, "RMS", "COMBSS", and "NBA", corresponding to sections 4.1, 4.2 and 4.3 respectively. The row-wise contamination models results are under "MSSim.R" and "COMBSS.R". The response contamination model results are under "MSSimC-NS.R" and "COMBSSC-NS.R". Their respective code to produce figures fall under "MSPlots.R", "COMBSSPlots.R", "MSPlotsC-NS.R", and "COMBSSC-NSPlots.R" respectively.
+\\
+The Moka style benchmark is found under the file COMBSSBenchmark.R and COMBSSBenchmarkPlots.R. 
+\\
+The files "Functions.R" and "CppFuncs.cpp" contain functions for all three folders. We have also included the simulation results in .RData files. The file paths assumes "Robust COMBSS" is the home working directory.
 
 # Data Availability
 The raw NBA data csv files is given in the "NBA" folder, and the code to process the data into the used dataset is provided in NBA/NBA.R. It can also be extracted as a csv file given as NBAOutlier.csv.

@@ -53,11 +53,23 @@ vlines <- data.frame(
               "(ii):~n==500*`,`~p==50*`,`~`|`*beta[S]*`|`==5"),
   xint    = c(3, 5)
 )
-  
+#8x10
 ggplot(mcf, aes(x = size, y = value/1000, colour = Method, group = Method)) +
   geom_line(linewidth = 0.8) +
-  facet_grid(TauP~Setting,labeller = labeller(Setting = label_parsed, TauP = label_value), scales = "free") +
-  facetted_pos_scales(
+  facet_grid(
+    TauP ~ Setting,
+    labeller = labeller(
+      Setting = label_parsed,
+      TauP = as_labeller(
+        c(
+          "Contamination: 0%" = "tau == 0",
+          "Contamination: 10%" = "tau == 0.1"
+        ),
+        default = label_parsed
+      )
+    ),
+    scales = "free"
+  ) +  facetted_pos_scales(
     y = list(
       TauP == "Contamination: 0%"   ~ scale_y_continuous(limits = c(0.5, 1), breaks = c(0.5,0.6,0.7,0.8,0.9,1)),
       TauP == "Contamination: 10%" ~ scale_y_continuous(limits = c(0.5, 1))),
@@ -67,7 +79,7 @@ ggplot(mcf, aes(x = size, y = value/1000, colour = Method, group = Method)) +
       Setting == "(i):~n==200*`,`~p==20*`,`~`|`*beta[S]*`|`==3" ~ scale_x_continuous(breaks = c(1,3,10,19),
                                                                                  limits = c(1,19))
     )) + 
-  ylab("Correct Model Empirical Selection Probability") +
+  ylab("Good/Correct Model Empirical Selection Probability") +
   xlab("Model Size") + 
   geom_vline(data = vlines, aes(xintercept = xint), linetype = "dashed", alpha = 0.5) + 
   theme_few_grid(base_size = 15) + 
@@ -94,6 +106,7 @@ cft2 = data.frame(Time = cft2, method = rep(c("Robust COMBSS", "COMBSS", "FRB"),
 cft2$method = factor(cft2$method, levels = c("FRB", "Robust COMBSS", "COMBSS"))
 
 cft = rbind(cft1, cft2)
+# 5x10
 ggplot(cft, aes(x = method,
                        y = log10(as.numeric(Time)),
                        colour = method)) +
